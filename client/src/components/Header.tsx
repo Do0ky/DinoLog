@@ -1,12 +1,10 @@
 /* STYLE */
 import './Header.css';
 /* REACT */
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 function Header() {
-
-    const navigate = useNavigate();
 
     // If not logged: display "Log In". If logged in: display "Log Out" + Dropdown menu
     const [isLoggedIn, setIsLoggedIn] = useState(false);
