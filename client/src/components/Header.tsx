@@ -48,7 +48,7 @@ function Header() {
                     ) : (
                         <div className="user-menu">
                             <img 
-                                src="/images/dinolog_default-avatar.png" 
+                                src="/images/dinolog_default-avatar.jpg" 
                                 alt="User avatar" 
                                 className="user-avatar"
                             />
