@@ -1,0 +1,101 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  /*CSS files are processed by Webpack, which tries to resolve url() paths relative to the CSS file’s location inside src/. That's why /images/... from the public/ folder doesn't work*/
+  background-image: url('../assets/dinolog_herosection-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #f5f2ec;
+  overflow: hidden;
+}
+/* Gradient overlay to improve readability */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(30, 30, 30, 0.3) 0%,
+    rgba(30, 30, 30, 0.5) 50%,
+    rgba(30, 30, 30, 0.6) 100%
+  );
+  z-index: 1;
+}
+/* Foreground content */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 1rem;
+  font-family: 'IBM Plex Sans', serif;
+}
+.hero-title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #2E2E2E;
+  margin-top: 0.7rem;
+  margin-bottom: 0;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+.hero-subtitle {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  color: #e9e4da;
+}
+/* Buttons */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.hero-btn {
+  padding: 0.8rem 1.6rem;
+  border: 1px solid #d8c79b;
+  background: rgba(216, 199, 155, 0.15);
+  color: #f5f2ec;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.hero-btn:hover {
+  background-color: #d8c79b;
+  color: #2e2e2e;
+  transform: translateY(-2px);
+}
+.explore-btn {
+  background-color: rgba(216, 199, 155, 0.2);
+}
+.login-btn {
+  background-color: transparent;
+}
+/* Optional vignette around edges for immersion */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.6rem;
+  }
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  .hero-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
