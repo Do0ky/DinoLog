@@ -1,38 +1,64 @@
-.App {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #e0d6c3;
+  border-bottom: 2px solid #c2b59b;
+}
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+nav a {
+  margin: 0 1rem;
+}
+.signin-btn {
+  background-color: #a68b5b;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+.hero {
+  /*CSS files are processed by Webpack, which tries to resolve url() paths relative to the CSS file’s location inside src/. That's why /images/... from the public/ folder doesn't work*/
+  background-image: url('./assets/dinolog_herosection-bg1.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 6rem 2rem;
+  text-align: center;
+  color: #fff;
+}
+.hero-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.discover-btn {
+  background-color: #6b8e23;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+.map-section {
+  padding: 4rem 2rem;
+  background-color: #f0e8d9;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.map-placeholder {
+  height: 80vh;
+  border: 2px dashed #aaa;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: #777;
+  font-style: italic;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #e0d6c3;
+  border-top: 2px solid #c2b59b;
+  font-size: 0.9rem;
 }
