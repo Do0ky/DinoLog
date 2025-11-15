@@ -5,8 +5,8 @@ function HeroSection() {
 
     // Scrolls smoothly to discoveries/map section
     const handleScrollToDiscoveries = () => {
-        const section = document.querySelector('#discoveries');
-        if (section) { section.scrollIntoView({ behavior: 'smooth' }); }
+        const discoverMap = document.querySelector('#discoveries');
+        if (discoverMap) { discoverMap.scrollIntoView({ behavior: 'smooth' }); }
     };
 
     //Click opens the modal for user auth
