@@ -16,7 +16,7 @@ function HeroSection() {
     };
 
     return(
-        <section className="hero">
+        <section className="hero" aria-label="DinoLog hero section">
 
             {/* Background overlay */}
             <div className="hero-overlay"></div>
@@ -24,7 +24,7 @@ function HeroSection() {
             {/* Content */}
             <div className="hero-content">
                 <h1 className="hero-title">DinoLog</h1>
-                <p className="hero-subtitle">Where science leaves its mark.</p>
+                <p className="hero-subtitle">Where science<br/>leaves its mark.</p>
                 
                 <div className="hero-buttons">
                     <button className="hero-btn explore-btn" onClick={handleScrollToDiscoveries}>

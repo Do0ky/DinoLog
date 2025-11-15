@@ -25,54 +25,57 @@
     rgba(30, 30, 30, 0.6) 100%
   );
   z-index: 1;
+  mix-blend-mode:lighten;
 }
 /* Foreground content */
 .hero-content {
-  position: relative;
+  position: absolute;
+  top: 12vh;
   z-index: 2;
   max-width: 700px;
-  padding: 1rem;
-  font-family: 'IBM Plex Sans', serif;
+  padding: 2rem;
+  width: 100%;
 }
 .hero-title {
-  font-size: 4rem;
+  font-size: 6rem;
   font-weight: 700;
   color: #2E2E2E;
-  margin-top: 0.7rem;
-  margin-bottom: 0;
-  letter-spacing: 2px;
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 .hero-subtitle {
-  font-size: 1.3rem;
+  font-size: 2.7rem;
   font-weight: 400;
-  margin-bottom: 2rem;
-  color: #e9e4da;
+  margin-bottom: 5rem;
+  color: #303030da;
 }
 /* Buttons */
 .hero-buttons {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 .hero-btn {
   padding: 0.8rem 1.6rem;
-  border: 1px solid #d8c79b;
   background: rgba(216, 199, 155, 0.15);
-  color: #f5f2ec;
-  border-radius: 6px;
+  color: #728C69;
+  border-radius: 80px;
   font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.25s ease-in-out;
+  padding: 0.65rem 1.15rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: transform 160ms ease, box-shadow 160ms ease;
 }
 .hero-btn:hover {
-  background-color: #d8c79b;
-  color: #2e2e2e;
+  background-color: #cfbb9da8;
+  color: #d4c5af;
   transform: translateY(-2px);
 }
 .explore-btn {
-  background-color: rgba(216, 199, 155, 0.2);
+  background: linear-gradient(180deg, #64553ef1 0%, #332d23f1 100%);
+  box-shadow: 0 6px 18px rgba(59,78,34,0.18);
 }
 .login-btn {
   background-color: transparent;
@@ -89,13 +92,13 @@
 /* Responsive */
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2.6rem;
+    font-size: 4.5rem;
   }
   .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 2rem;
   }
   .hero-buttons {
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 2rem;
   }
 }
