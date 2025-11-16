@@ -23,14 +23,14 @@ function HeroSection() {
 
             {/* Content */}
             <div className="hero-content">
-                <h1 className="hero-title">DinoLog</h1>
+                <h1 className="hero-title">Dino<em>Log</em></h1>
                 <p className="hero-subtitle">Where science<br/>leaves its mark.</p>
                 
                 <div className="hero-buttons">
-                    <button className="hero-btn explore-btn" onClick={handleScrollToDiscoveries}>
+                    <button className="hero-btn explore-btn" aria-label="Scroll to discoveries map" onClick={handleScrollToDiscoveries}>
                         Explore Discoveries
                     </button>
-                    <button className="hero-btn login-btn" onClick={handleLoginClick}>
+                    <button className="hero-btn login-btn" aria-label="Open login modal" onClick={handleLoginClick}>
                         Log In
                     </button>
                 </div>
