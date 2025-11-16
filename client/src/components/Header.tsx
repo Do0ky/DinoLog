@@ -9,6 +9,13 @@ function Header() {
     // If not logged: display "Log In". If logged in: display "Log Out" + Dropdown menu
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    // Scrolls smoothly to discoveries/map section
+    const handleScrollToDiscoveries = (e: React.MouseEvent) => {
+        e.preventDefault(); // prevent jump
+        const discoverMap = document.querySelector('#discoveries');
+        if (discoverMap) { discoverMap.scrollIntoView({ behavior: "smooth" }); }
+    };
+
     //Click opens the modal for user auth
     const handleLoginClick = () => {
         // Later: trigger login modal
@@ -36,7 +43,7 @@ function Header() {
                 
                 {/* Center: Navigation */}
                 <nav className="header-nav">
-                    <a href="#discoveries">Discoveries</a>
+                    <a href="#discoveries" onClick={handleScrollToDiscoveries}>Discoveries</a>
                 </nav>
 
                 {/* Right: User section */}
