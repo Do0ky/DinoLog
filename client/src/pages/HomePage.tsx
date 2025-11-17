@@ -1,5 +1,5 @@
 import HeroSection from "../components/HeroSection";
-import MapSection from "../components/MapSection/MapSection";
+import MapSection from "../components/MapSection";
 import { useState } from 'react'; 
 
 function HomePage() {
