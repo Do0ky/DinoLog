@@ -30,7 +30,7 @@ function MapSection({ isLoggedIn }: { isLoggedIn: boolean }) {
         <MapContainer 
             center={[12, 0]} 
             zoom={2} 
-            scrollWheelZoom={true} 
+            scrollWheelZoom={false} 
             className="map-container"
         >
            
