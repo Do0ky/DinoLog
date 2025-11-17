@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./client/public/images/dinolog_logo-light.svg" alt="DinoLog logo" width="640" />
+  <img src="./assets/dinolog_logo-light.svg" alt="DinoLog logo" width="640" />
 
   <!-- Badges -->
   <p>
