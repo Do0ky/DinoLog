@@ -3,11 +3,15 @@ import './Header.css';
 /* REACT */
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+/* COMPONENT */
+import AuthModal from './AuthModal';
 
 function Header() {
 
     // If not logged: display "Log In". If logged in: display "Log Out" + Dropdown menu
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // Log in Modal not visible
+    const [showAuthModal, setShowAuthModal] = useState(false);
 
     // Scrolls smoothly to discoveries/map section
     const handleScrollToDiscoveries = (e: React.MouseEvent) => {
@@ -16,17 +20,15 @@ function Header() {
         if (discoverMap) { discoverMap.scrollIntoView({ behavior: "smooth" }); }
     };
 
-    //Click opens the modal for user auth
-    const handleLoginClick = () => {
-        // Later: trigger login modal
-        console.log("Open login modal");
-    };
+    //Click opens the AuthModal
+    const openAuthModal = () => setShowAuthModal(true);
 
     const handleLogout = () => {
         setIsLoggedIn(false);
     };
 
     return (
+        <>
         <header className="header">
             <div className="header_container">
 
@@ -43,11 +45,17 @@ function Header() {
                 
                 {/* Navigation */}
                 <div className="header-user">
-                    <a href="#discoveries" className="header-discoveries-link" onClick={handleScrollToDiscoveries}>Discoveries</a>
+                    <a 
+                        href="#discoveries" 
+                        className="header-discoveries-link" 
+                        onClick={handleScrollToDiscoveries}
+                    >
+                        Discoveries
+                    </a>
                 
                 {/* User section */}
                     {!isLoggedIn ? (
-                        <button className="header-login-btn" onClick={handleLoginClick}>
+                        <button className="header-login-btn" onClick={openAuthModal}>
                             Log In
                         </button>
                     ) : (
@@ -66,9 +74,13 @@ function Header() {
                 </div> 
             </div>
         </header>
+
+        {/* Auth Modal */}
+            {showAuthModal && (
+                <AuthModal closeModal={ () => setShowAuthModal(false) } />
+            )}
+        </>
     );
 };
-/*
-Add scroll detection to make header more or less opaque when the user scrolls down?
-*/
+
 export default Header;

@@ -1,7 +1,14 @@
 /* STYLE */
 import './HeroSection.css';
+/* REACT */
+import { useState } from 'react';
+/* COMPONENT */
+import AuthModal from './AuthModal';
 
 function HeroSection() {
+
+    // Log in Modal not visible
+    const [showAuthModal, setShowAuthModal] = useState(false);
 
     // Scrolls smoothly to discoveries/map section
     const handleScrollToDiscoveries = () => {
@@ -10,10 +17,7 @@ function HeroSection() {
     };
 
     //Click opens the modal for user auth
-    const handleLoginClick = () => {
-        // Later: trigger login modal
-        console.log("Open login modal");
-    };
+    const openAuthModal = () => setShowAuthModal(true);
 
     return(
         <section className="hero" aria-label="DinoLog hero section">
@@ -30,11 +34,16 @@ function HeroSection() {
                     <button className="hero-btn explore-btn" aria-label="Scroll to discoveries map" onClick={handleScrollToDiscoveries}>
                         Explore Discoveries
                     </button>
-                    <button className="hero-btn login-btn" aria-label="Open login modal" onClick={handleLoginClick}>
+                    <button className="hero-btn login-btn" aria-label="Open login modal" onClick={openAuthModal}>
                         Log In
                     </button>
                 </div>
             </div>
+
+            {/* Auth Modal */}
+            {showAuthModal && (
+                <AuthModal closeModal={ () => setShowAuthModal(false) } />
+            )}
 
         </section>
     );
