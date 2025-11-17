@@ -1,11 +1,15 @@
 import HeroSection from "../components/HeroSection";
-import MapSection from "../components/MapSection";
+import MapSection from "../components/MapSection/MapSection";
+import { useState } from 'react'; 
 
 function HomePage() {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     return (
         <>
             <HeroSection />
-            <MapSection />
+            <MapSection  isLoggedIn={isLoggedIn} />
         </>
     );
 }
