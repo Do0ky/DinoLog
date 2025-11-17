@@ -41,13 +41,11 @@ function Header() {
                     </Link>
                 </div>
                 
-                {/* Center: Navigation */}
-                <nav className="header-nav">
-                    <a href="#discoveries" onClick={handleScrollToDiscoveries}>Discoveries</a>
-                </nav>
-
-                {/* Right: User section */}
+                {/* Navigation */}
                 <div className="header-user">
+                    <a href="#discoveries" className="header-discoveries-link" onClick={handleScrollToDiscoveries}>Discoveries</a>
+                
+                {/* User section */}
                     {!isLoggedIn ? (
                         <button className="header-login-btn" onClick={handleLoginClick}>
                             Log In
