@@ -24,7 +24,7 @@ function HeroSection() {
             {/* Content */}
             <div className="hero-content">
                 <h1 className="hero-title">Dino<em>Log</em></h1>
-                <p className="hero-subtitle">Where science<br/>leaves its mark.</p>
+                <p className="hero-subtitle">Logging the past,<br/>one fossil at a time.</p>
                 
                 <div className="hero-buttons">
                     <button className="hero-btn explore-btn" aria-label="Scroll to discoveries map" onClick={handleScrollToDiscoveries}>
