@@ -1,13 +1,19 @@
-# 🦴🌍📍 DINOLOG
+<div align="center">
+  <img src="./client/src/assets/dinolog_logo-light.svg" alt="DinoLog logo" width="640" />
 
-![Static Badge](https://img.shields.io/badge/React-blue?style=plastic&logo=react&color=61DBFB)
-![Static Badge](https://img.shields.io/badge/TypeScript-blue?style=plastic&logo=typescript)
-![Static Badge](https://img.shields.io/badge/npm-red?style=plastic&logo=npm&color=CB3837)
-![Static Badge](https://img.shields.io/badge/CSS3-blue?style=plastic&logo=css&color=2965f1)
-![Static Badge](https://img.shields.io/badge/Git-blue?style=plastic&logo=git&color=f14e32)
+  <!-- Badges -->
+  <p>
+    <img alt="React" src="https://img.shields.io/badge/React-blue?style=plastic&logo=react&color=61DBFB" />
+    <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-blue?style=plastic&logo=typescript" />
+    <img alt="npm" src="https://img.shields.io/badge/npm-red?style=plastic&logo=npm&color=CB3837" />
+    <img alt="CSS3" src="https://img.shields.io/badge/CSS3-blue?style=plastic&logo=css&color=2965f1" />
+    <img alt="Git" src="https://img.shields.io/badge/Git-blue?style=plastic&logo=git&color=f14e32" />
+  </p>
+</div>
 
-A React + TypeScript interactive paleontological field map.
-<br>Explore fossil discoveries worldwide and open specimen popups to dive into their details. Want to go further? Register to add your own finds and build your personal digital field log.”
+
+<em>A React + TypeScript interactive paleontological field map.
+<br>Explore fossil discoveries worldwide and open specimen popups to dive into their details. Want to go further? Register to add your own finds and build your personal digital field log.</em>
 
 ---
 
@@ -15,7 +21,7 @@ A React + TypeScript interactive paleontological field map.
 
 **DinoLog** is designed for researchers, amateur paleontologists, and enthusiasts who want to explore and record fossil discoveries. Inspired by field notebooks and geological maps, the app blends scientific accuracy with archival aesthetics.
 <br>It makes paleontology feel immersive and authentic — a digital field journal where every fossil has a place and every place tells a million-year-old story.
----
+
 
 ## 🚀 Features
 
@@ -32,8 +38,6 @@ A React + TypeScript interactive paleontological field map.
 - ♿ **Accessibility Considerations**  
   Semantic HTML, keyboard navigation, and clear contrast for readability.
 
----
-
 ## 🧪 Technologies Used
 
 - **React** with Hooks
@@ -41,8 +45,7 @@ A React + TypeScript interactive paleontological field map.
 - **CSS** 
 - **Leaflet / React‑Leaflet** for maps
 - **React Router**
-  
----
+
 
 ## 📁 Project Structure
 ```bash
@@ -62,7 +65,6 @@ src/
 ├── index.tsx
 └── App.css
 ```
----
 
 ## 📚 Data Sources and inspirations
 
@@ -71,7 +73,6 @@ src/
 - [Ancient Earth Globe](https://dinosaurpictures.org/ancient-earth#170)
 - Geological maps, expedition journals, and paleontology field notes
 
----
 
 ## 🛠️ Installation & Setup
 ```bash
@@ -80,14 +81,13 @@ cd DinoLog
 npm install
 npm start
 ```
----
+
 
 ## 💡 Potential Future Enhancements
 - 🧭 Advanced map filters (epoch, formation, location)
 - 🦖 Species Page Expansion (connect popup to profiles similar to DinoFinder)
 - ♿ Accessibility audit and improvements
 
----
 
 ## 👩‍💻 Author
 Created by:
