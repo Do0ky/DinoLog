@@ -5,8 +5,9 @@
     linear-gradient(rgba(221, 207, 180, 0.267), rgba(194, 171, 128, 0.63)),
     url('../assets/black-paper.png');
   background-size: 300px;
-  border-bottom: 3px solid #9c8d7a;
+  box-shadow: 0 12px 25px rgba(146, 125, 79, 0.753);
   position: relative;
+  z-index: 2;
 }
 .header_container{
   max-width: 1200px;
