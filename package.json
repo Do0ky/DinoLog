@@ -1,9 +1,9 @@
 {
-  "name": "DinoLog",
+  "name": "dinolog_node",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,8 +11,17 @@
   "license": "MIT",
   "description": "A full-stack app to map and share dinosaur fossil discoveries",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
     "express": "^5.1.0",
-    "morgan": "^1.10.1"
+    "express-session": "^1.18.2",
+    "mongoose": "^8.20.0",
+    "morgan": "^1.10.1",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   }
 }
