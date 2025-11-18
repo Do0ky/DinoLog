@@ -1,5 +1,3 @@
-/* STYLING */
-import './App.css';
 /* REACT */
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 /* COMPONENTS */
