@@ -12,6 +12,8 @@ function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     // Log in Modal not visible
     const [showAuthModal, setShowAuthModal] = useState(false);
+    // For user avatar
+    const [user, setUser] = useState<{ username?: string; avatarUrl?: string }> ({});
 
     // Scrolls smoothly to discoveries/map section
     const handleScrollToDiscoveries = (e: React.MouseEvent) => {
@@ -23,7 +25,14 @@ function Header() {
     //Click opens the AuthModal
     const openAuthModal = () => setShowAuthModal(true);
 
+    const handleLoginSuccess = (userData: any) => {
+        setIsLoggedIn(true);
+        setUser(userData);
+        setShowAuthModal(false);
+    };
+
     const handleLogout = () => {
+        localStorage.removeItem("token");
         setIsLoggedIn(false);
     };
 
@@ -61,7 +70,7 @@ function Header() {
                     ) : (
                         <div className="user-menu">
                             <img 
-                                src="/images/dinolog_default-avatar.jpg" 
+                                src={user.avatarUrl || "/images/dinolog_default-avatar.jpg"}
                                 alt="User avatar" 
                                 className="user-avatar"
                             />
@@ -77,7 +86,10 @@ function Header() {
 
         {/* Auth Modal */}
             {showAuthModal && (
-                <AuthModal closeModal={ () => setShowAuthModal(false) } />
+                <AuthModal 
+                    closeModal={ () => setShowAuthModal(false) }
+                    onLoginSuccess={handleLoginSuccess}  
+                />
             )}
         </>
     );
