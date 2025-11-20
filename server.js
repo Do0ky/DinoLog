@@ -7,7 +7,7 @@ const cors = require('cors');
 const passport = require('passport');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
-//const userRoutes = require('./routes/users');
+//const userRoutes = require('./routes/user');
 
 // Dotenv config
 dotenv.config( { path: './config/config.env' } );
@@ -17,7 +17,7 @@ require('./config/passport')(passport);
 
 const app = express();
 
-// Middleware
+// Middlewares
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cors());
