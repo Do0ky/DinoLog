@@ -7,12 +7,13 @@ const cors = require('cors');
 const passport = require('passport');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/users');
+//const userRoutes = require('./routes/users');
+
+// Dotenv config
+dotenv.config( { path: './config/config.env' } );
 
 // Passport config
 require('./config/passport')(passport);
-// Dotenv config
-dotenv.config( { path: './config/config.env' } );
 
 const app = express();
 
@@ -26,13 +27,11 @@ app.use(passport.initialize());
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
+//app.use('/api/users', userRoutes);
 
 // DB connection
-mongoose.connect('mongodb://localhost:27017/dinolog', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log('MongoDB connected'))
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connected'))
   .catch(err => console.error(err));
 
 // Start server
