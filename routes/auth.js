@@ -8,6 +8,7 @@ const router = express.Router();
 // REGISTER
 router.post('/register', async (req, res) => {
     try {
+        console.log("📨 /api/auth/register hit!", req.body); 
         const { username, email, password } = req.body;
 
         // basic validation
@@ -50,20 +51,30 @@ router.post('/register', async (req, res) => {
             user: safeUser
         });
     } catch (err) {
+        console.error("Registration error:", err);
         res.status(500).json({ error: err.message });
     }
 });
 
 // LOGIN
 router.post('/login', (req, res, next) => {
+    console.log("📨 /api/auth/login hit!", req.body);
+
     passport.authenticate('local', { session: false }, (err, user, info) => {
-        if (err) return next(err);
-        if (!user) return res.status(401).json({ error: info?.message || 'Invalid credentials' });
+        if (err) {
+            console.error("Login error:", err); 
+            return next(err);
+        }
+        if (!user) {
+            console.log("Login failed:", info?.message);
+            return res.status(401).json({ error: info?.message || 'Invalid credentials' });
+        }
+        console.log("Login successful, raw user:", user);
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         const { password: _, ...safeUser } = user.toObject();
         res.json({ message: 'Login successful', token, user: safeUser });
-    })(req, res, next);
+    }) (req, res, next);
 });
 
 // PROFILE (protected)
