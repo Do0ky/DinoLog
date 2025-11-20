@@ -3,7 +3,7 @@ import './AuthModal.css';
 /* REACT */
 import { useState } from 'react';
 
-function AuthModal({ closeModal }: { closeModal: () => void }) {
+function AuthModal( { closeModal, onLoginSuccess }: { closeModal: () => void; onLoginSuccess: (user: any) => void } ) {
     // Tab state
     const [activeTab, setActiveTab] = useState<"login" | "register">("login");
 
@@ -13,7 +13,12 @@ function AuthModal({ closeModal }: { closeModal: () => void }) {
     const [password, setPassword] = useState("");
 
     // Error message state
-    const [errors, setErrors] = useState<{ name?: string; email?: string; password?: string }>({});
+    const [errors, setErrors] = useState<{ 
+        name?: string; 
+        email?: string; 
+        password?: string;
+        general?: string;
+    }> ({});
 
     // Validation for registration
     const validateRegister = () => {
@@ -40,13 +45,62 @@ function AuthModal({ closeModal }: { closeModal: () => void }) {
         return Object.keys(newErrors).length === 0;
     };
 
-    // Submit handling
-    const handleRegisterSubmit = (e: React.FormEvent) => {
+    // User registering
+    const handleRegisterSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!validateRegister()) return;
-        alert(`✔ Registered successfully: ${name}, ${email}`);
-        closeModal();
+        if ( !validateRegister() ) return;
+
+        try {
+            const response = await fetch("http://localhost:5001/api/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username: name, email, password }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) { setErrors({ general: data.error });
+                return;
+            }
+
+            // Save token if you want to auto-login
+            localStorage.setItem("token", data.token);
+
+            alert(`✔ Registered successfully: ${data.user.username}`);
+            onLoginSuccess(data.user);
+
+        } catch (err) {
+            console.error("Registration failed", err);
+        }
     };
+
+    // User logging in 
+    const handleLoginSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch("http://localhost:5001/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) { setErrors({ general: data.error });
+                return;
+            }
+
+            localStorage.setItem("token", data.token);
+
+            alert(`✔ Logged in as: ${data.user.username}`);
+            onLoginSuccess(data.user);
+
+        } catch (err) {
+            console.error("Login failed", err);
+        }
+    };
+
 
     return (
         <div className="auth-overlay" onClick={closeModal}>
@@ -76,12 +130,22 @@ function AuthModal({ closeModal }: { closeModal: () => void }) {
                         {/* Log In tab */}
                         <div className="drawer-panel login-panel">
                         {activeTab === "login" && (
-                            <form className="auth-form">
+                            <form className="auth-form" onSubmit={handleLoginSubmit}>
                             <label>Email</label>
-                            <input type="email" placeholder="fossil-hunter@rockmail.co" />
+                            <input
+                                type="email"
+                                placeholder="fossil-hunter@rockmail.co"
+                                value={email}
+                                onChange={ (e) => setEmail(e.target.value) }    
+                            />
 
                             <label>Password</label>
-                            <input type="password" placeholder="••••••••" />
+                            <input 
+                                type="password"
+                                placeholder="••••••••"
+                                value={password}
+                                onChange={ (e) => setPassword(e.target.value) }
+                            />
 
                             <button type="submit" className="auth-submit">
                                 Log In
