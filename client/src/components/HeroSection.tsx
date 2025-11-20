@@ -7,8 +7,10 @@ import AuthModal from './AuthModal';
 
 function HeroSection() {
 
-    // Log in Modal not visible
+    // Modal visibility
     const [showAuthModal, setShowAuthModal] = useState(false);
+    // Loggedin state
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     // Scrolls smoothly to discoveries/map section
     const handleScrollToDiscoveries = () => {
@@ -16,8 +18,20 @@ function HeroSection() {
         if (discoverMap) { discoverMap.scrollIntoView({ behavior: 'smooth' }); }
     };
 
-    //Click opens the modal for user auth
+    //Open modal for user auth
     const openAuthModal = () => setShowAuthModal(true);
+
+    // Handle when login succeeds
+    const handleLoginSuccess = () => {
+        setIsLoggedIn(true);
+        setShowAuthModal(false);
+    };
+
+    // Logout handler
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+    };
 
     return(
         <section className="hero" aria-label="DinoLog hero section">
@@ -34,15 +48,24 @@ function HeroSection() {
                     <button className="hero-btn explore-btn" aria-label="Scroll to discoveries map" onClick={handleScrollToDiscoveries}>
                         Explore Discoveries
                     </button>
-                    <button className="hero-btn login-btn" aria-label="Open login modal" onClick={openAuthModal}>
-                        Log In
-                    </button>
+                    {!isLoggedIn ? (
+                        <button className="hero-btn login-btn" aria-label="Open login modal" onClick={openAuthModal}>
+                            Log In
+                        </button>
+                    ) : (
+                        <button className="hero-btn login-btn" aria-label="Logout" onClick={handleLogout}>
+                            Logout
+                        </button>
+                    )}
                 </div>
             </div>
 
             {/* Auth Modal */}
             {showAuthModal && (
-                <AuthModal closeModal={ () => setShowAuthModal(false) } />
+                <AuthModal 
+                    closeModal={ () => setShowAuthModal(false) }
+                    onLoginSuccess={handleLoginSuccess}  
+                />
             )}
 
         </section>
