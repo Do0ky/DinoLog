@@ -3,6 +3,8 @@ import './MapSection.css';
 /* REACT */
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import * as L from "leaflet";
+/* CONTEXT */
+import { useAuth } from '../context/AuthContext';
 
 type Fossil = {
   id: number;
@@ -22,13 +24,15 @@ const sampleFossils: Fossil[] = [
   { id: 8, name: 'Tyrannosaurus', image: '/images/tyrannosaurus.jpg', coords: [46.92, -107.73] },
 ];
 
-function MapSection({ isLoggedIn }: { isLoggedIn: boolean }) {
-  return (
+function MapSection() {
+    const { isLoggedIn } = useAuth();
+
+    return (
     <section id="discoveries" className="map-section">
 
         {/* Map */}
         <MapContainer 
-            center={[12, 0]} 
+            center={[12, 10]} 
             zoom={2} 
             scrollWheelZoom={false} 
             className="map-container"
@@ -64,7 +68,10 @@ function MapSection({ isLoggedIn }: { isLoggedIn: boolean }) {
 
         {/* Floating action button */}
         {isLoggedIn && (
-            <button className="discovery-button">＋ Add Discovery</button>
+            <div className="discovery-wrapper">
+                <button className="discovery-button">＋</button>
+                <span className="discovery-label">Add Discovery</span>
+            </div>
         )}
 
     </section>
