@@ -10,12 +10,12 @@ import MyFossilsPage from './pages/MyFossilsPage';
 function App() {
   return (
     <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/myfossils" element={<MyFossilsPage />} />
-        </Routes>
-        <Footer />
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/myfossils" element={<MyFossilsPage />} />
+      </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
