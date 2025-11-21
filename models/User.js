@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     avatarUrl: { 
         type: String, 
-        default: '/assets/dinolog_default-avatar.jpg' 
+        default: '/images/dinolog_default-avatar.jpg' 
     }
     }, { 
         timestamps: true 
