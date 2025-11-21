@@ -1,7 +1,10 @@
 /* STYLE */
 import './AddDiscoveryForm.css';
+import 'react-toastify/dist/ReactToastify.css';
+import '../App.css';
 /* REACT */
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 /* CONTEXT */
 import { useAuth } from '../context/AuthContext';
 
@@ -46,6 +49,7 @@ export default function AddDiscoveryForm({ onClose, onSuccess } : { onClose: () 
 
       if (json.success) {
         onSuccess(json.discovery);
+        toast.success("Discovery added successfully!");
         onClose();
       } else {
         alert("Failed to add discovery: " + (json.error || "Unknown error"));
