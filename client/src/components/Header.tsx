@@ -3,18 +3,18 @@ import './Header.css';
 /* REACT */
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+/* CONTEXT */
+import { useAuth } from '../context/AuthContext';
 /* COMPONENT */
 import AuthModal from './AuthModal';
 
 function Header() {
 
-    // If not logged: display "Log In". If logged in: display "Log Out" + Dropdown menu
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { isLoggedIn, user, login, logout } = useAuth();
+
     // Log in Modal not visible
     const [showAuthModal, setShowAuthModal] = useState(false);
-    // For user avatar
-    const [user, setUser] = useState<{ username?: string; avatarUrl?: string }> ({});
-
+    
     // Scrolls smoothly to discoveries/map section
     const handleScrollToDiscoveries = (e: React.MouseEvent) => {
         e.preventDefault(); // prevent jump
@@ -23,18 +23,7 @@ function Header() {
     };
 
     //Click opens the AuthModal
-    const openAuthModal = () => setShowAuthModal(true);
-
-    const handleLoginSuccess = (userData: any) => {
-        setIsLoggedIn(true);
-        setUser(userData);
-        setShowAuthModal(false);
-    };
-
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        setIsLoggedIn(false);
-    };
+    const openAuthModal = () => setShowAuthModal(true); 
 
     return (
         <>
@@ -70,13 +59,13 @@ function Header() {
                     ) : (
                         <div className="user-menu">
                             <img 
-                                src={user.avatarUrl || "/images/dinolog_default-avatar.jpg"}
-                                alt="User avatar" 
+                                src={user?.avatarUrl || "/images/dinolog_default-avatar.jpg"}
+                                alt="Avatar" 
                                 className="user-avatar"
                             />
                             <div className="dropdown">
                                 <Link to="/myfossils">My Fossils</Link>
-                                <button onClick={handleLogout}>Logout</button>
+                                <button onClick={logout}>Logout</button>
                             </div>
                         </div>
                     )}
@@ -88,7 +77,7 @@ function Header() {
             {showAuthModal && (
                 <AuthModal 
                     closeModal={ () => setShowAuthModal(false) }
-                    onLoginSuccess={handleLoginSuccess}  
+                    onLoginSuccess={login} 
                 />
             )}
         </>
