@@ -68,7 +68,7 @@ export default function AddDiscoveryForm({ onClose, onSuccess } : { onClose: () 
 
         <form onSubmit={submit}>
           <label>Name *</label>
-          <input name="name" placeholder="Great Patagonian Mystery Fossil" required onChange={update} />
+          <input name="name" placeholder="Exquisite Mystery Skull" required onChange={update} />
 
           <label>Coordinates *</label>
           <div className="coords">
@@ -76,7 +76,7 @@ export default function AddDiscoveryForm({ onClose, onSuccess } : { onClose: () 
             <input name="lng" placeholder="Longitude" required onChange={update} />
           </div>
 
-          <label>Genus</label>
+          <label>Genus or Species</label>
           <input name="species" placeholder="Totallynotfakeus" onChange={update} />
           
           <label>Age</label>
@@ -89,7 +89,7 @@ export default function AddDiscoveryForm({ onClose, onSuccess } : { onClose: () 
           <textarea name="description" placeholder="Add notes so future paleontologists won’t curse you" onChange={update} />
 
           <label className="file-upload">
-            <span>Select a photo</span>
+            <span>{photo ? "Photo selected ✔" : "Select a photo"}</span>
             <input
               type="file"
               accept="image/*"
