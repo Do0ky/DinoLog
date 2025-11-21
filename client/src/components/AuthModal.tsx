@@ -2,8 +2,10 @@
 import './AuthModal.css';
 /* REACT */
 import { useState } from 'react';
+/* CONTEXT */
+import type { User } from "../context/AuthContext";
 
-function AuthModal( { closeModal, onLoginSuccess }: { closeModal: () => void; onLoginSuccess: (user: any) => void } ) {
+function AuthModal( { closeModal, onLoginSuccess }: { closeModal: () => void; onLoginSuccess: (token: string, user: User) => void } ) {
     // Tab state
     const [activeTab, setActiveTab] = useState<"login" | "register">("login");
 
@@ -66,7 +68,7 @@ function AuthModal( { closeModal, onLoginSuccess }: { closeModal: () => void; on
             // Save token if you want to auto-login
             localStorage.setItem("token", data.token);
 
-            onLoginSuccess(data.user);
+            onLoginSuccess(data.token, data.user);
             closeModal();
 
         } catch (err) {
@@ -91,10 +93,7 @@ function AuthModal( { closeModal, onLoginSuccess }: { closeModal: () => void; on
                 return;
             }
 
-            // Save token if you want to auto-login
-            localStorage.setItem("token", data.token);
-
-            onLoginSuccess(data.user);
+            onLoginSuccess(data.token, data.user);
             closeModal();
 
         } catch (err) {
@@ -148,6 +147,8 @@ function AuthModal( { closeModal, onLoginSuccess }: { closeModal: () => void; on
                                 onChange={ (e) => setPassword(e.target.value) }
                             />
 
+                            {errors.general && <small className="error">{errors.general}</small>}
+
                             <button type="submit" className="auth-submit">
                                 Log In
                             </button>
@@ -187,6 +188,7 @@ function AuthModal( { closeModal, onLoginSuccess }: { closeModal: () => void; on
                                 onChange={ (e) => setPassword(e.target.value) }
                             />
                             {errors.password && <small className="error">{errors.password}</small>}
+                            {errors.general && <small className="error">{errors.general}</small>}
 
                             <button type="submit" className="auth-submit">
                                 Create Account

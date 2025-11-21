@@ -1,18 +1,20 @@
 /* STYLE */
 import './MapSection.css';
 /* REACT */
+import { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import * as L from "leaflet";
 /* CONTEXT */
 import { useAuth } from '../context/AuthContext';
+/* COMPONENT */
+import AddDiscoveryForm from './AddDiscoveryForm';
 
 type Fossil = {
-  id: number;
+  id: String;
   name: string;
   image: string;
   coords: [number, number];
 };
-
 const sampleFossils: Fossil[] = [
   { id: 1, name: 'Eoraptor', image: '/images/eoraptor.jpg', coords: [-30.7, -67.8] },
   { id: 2, name: 'Massospondylus', image: '/images/massospondylus.jpg', coords: [-28.96, 27.43] },
@@ -24,15 +26,42 @@ const sampleFossils: Fossil[] = [
   { id: 8, name: 'Tyrannosaurus', image: '/images/tyrannosaurus.jpg', coords: [46.92, -107.73] },
 ];
 
+type Discovery = {
+  _id: string;
+  name: string;
+  coords: [number, number];
+  imageUrl?: string | null;
+  species?: string;
+  age?: string;
+  geologicalUnit?: string;
+  description?: string;
+};
+
 function MapSection() {
     const { isLoggedIn } = useAuth();
+    const [showForm, setShowForm] = useState(false);
+    const [discoveries, setDiscoveries] = useState(sampleFossils);
+
+  const addDiscovery = (newItem: Discovery) => {
+  setDiscoveries((prev) => [...prev,
+    {id: newItem._id,
+      name: newItem.name,
+      coords: newItem.coords,
+      image: newItem.imageUrl || undefined,
+      species: newItem.species,
+      age: newItem.age,
+      geologicalUnit: newItem.geologicalUnit,
+      notes: newItem.description,
+    }
+  ]);
+};
 
     return (
     <section id="discoveries" className="map-section">
 
         {/* Map */}
         <MapContainer 
-            center={[12, 10]} 
+            center={[20, 10]} 
             zoom={2} 
             scrollWheelZoom={false} 
             className="map-container"
@@ -68,10 +97,17 @@ function MapSection() {
 
         {/* Floating action button */}
         {isLoggedIn && (
-            <div className="discovery-wrapper">
+            <div className="discovery-wrapper" onClick={() => setShowForm(true)}>
                 <button className="discovery-button">＋</button>
                 <span className="discovery-label">Add Discovery</span>
             </div>
+        )}
+        {/* Add Discovery Form */}
+        {showForm && (
+            <AddDiscoveryForm 
+            onClose={() => setShowForm(false)} 
+            onSuccess={addDiscovery} 
+            />
         )}
 
     </section>

@@ -1,0 +1,167 @@
+/* Overlay */
+.add-discovery-form {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+/* Modal container */
+.add-discovery-form .modal-content {
+  width: min(480px, 92%);
+  background: rgba(243, 239, 231, 0.95);
+  border: 2px solid #9c8d7a;
+  border-radius: 10px;
+  padding: 1.6rem 1.4rem;
+  box-shadow:
+      0 8px 24px rgba(0,0,0,0.25),
+      inset 0 0 8px rgba(0,0,0,0.08);
+  position: relative;
+  font-family: 'Courier Prime', monospace;
+  background-image: url('../assets/natural-paper.png');
+  background-size: 550px;
+  background-blend-mode: multiply;
+
+  transform: translateY(-25px);
+  opacity: 0;
+  animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-40px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 1.2rem;
+  color: #2e2e2e;
+  font-size: 1.35rem;
+  letter-spacing: 0.03em;
+  text-shadow:
+    0.5px 0.5px 0 rgba(0,0,0,0.25),  
+    -0.5px -0.5px 0 rgba(228, 219, 219, 0.5);
+}
+
+/* Form */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+/* Labels */
+.modal-content label {
+  font-family: 'Courier Prime', monospace;
+  color: #39393b;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-shadow:
+    0.5px 0.5px 0 rgba(0,0,0,0.25),  
+    -0.5px -0.5px 0 rgba(228, 219, 219, 0.5);
+}
+
+/* Inputs */
+.modal-content input,
+.modal-content textarea {
+  font-family: 'IBM Plex Sans', sans-serif;
+  padding: 0.7rem 1rem;
+  border: 2px solid #9c8d7a;
+  border-radius: 6px;
+  background: #f7f4ee98;
+  color: #39393b;
+  resize: none;
+
+  box-shadow:
+      inset 0 0 3px rgba(0,0,0,0.08),
+      1px 2px 4px rgba(0,0,0,0.1);
+
+  transition: border-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+  color: #6d675f;
+  font-style: italic;
+  opacity: 1;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+  border-color: #a68b5b;
+  background: #f7f4eeec;
+  outline: none;
+  box-shadow:
+      0 0 0 3px rgba(166,139,91,0.15),
+      inset 0 0 3px rgba(0,0,0,0.25);
+}
+
+/* Coordinate field layout */
+.coords {
+  display: flex;
+  gap: 0.6rem;
+}
+
+/* File input */
+input[type="file"] {
+  background: none;
+  border: none;
+  padding-left: 0;
+  box-shadow: none;
+}
+
+/* Submit button */
+.submit-btn {
+  margin-top: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+
+  font-family: "Courier Prime", monospace;
+  font-size: 1rem;
+  font-weight: 600;
+
+  background-color: #ece2c7;
+  background-image: url('../assets/black-paper.png');
+  background-size: 250px;
+  background-blend-mode: luminosity;
+
+  border: 1px dashed #2c2c2c6c;
+  color: #39393b;
+  letter-spacing: 0.03em;
+
+  box-shadow: 1px 1px 0 #9c8d7a;
+  text-shadow:
+    0.5px 0.5px 0 rgba(0,0,0,0.25),  
+    -0.5px -0.5px 0 rgba(228, 219, 219, 0.5);
+
+  transition: transform 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: scale(1.03);
+}
+
+/* Close button (X) */
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  color: #3a3a3a;
+  text-shadow:
+    0.5px 0.5px 0 rgba(0,0,0,0.3),
+    -0.5px -0.5px 0 rgba(255,255,255,0.3);
+}
+
+.close-btn:hover {
+  transform: scale(1.1);
+}
