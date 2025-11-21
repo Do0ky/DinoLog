@@ -1,0 +1,12 @@
+/* Override react-toastify default */
+.Toastify__toast {
+  background: #f7f4ee;
+  color: #2e2e2e;
+  border: 2px solid #9c8d7a;
+  font-family: 'IBM Plex Sans', sans-serif;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+.Toastify__toast--success {
+  background: #d9caaa;
+  color: #2e2e2e;
+}
