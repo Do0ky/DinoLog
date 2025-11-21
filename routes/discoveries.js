@@ -7,6 +7,15 @@ const auth = require('./auth');
 // Multer: save uploads locally
 const upload = multer({ dest: "uploads/" });
 
+router.get("/", async (req, res) => {
+  try {
+    const discoveries = await Discovery.find();
+    res.json(discoveries);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch discoveries" });
+  }
+});
+
 router.post("/", auth, upload.single("photo"), async (req, res) => {
     try {
         const { name, lat, lng, species, age, geologicalUnit, description } = req.body;
@@ -33,7 +42,7 @@ router.post("/", auth, upload.single("photo"), async (req, res) => {
         await newDiscovery.save();
 
         res.json({ success: true, discovery: newDiscovery });
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Failed to add discovery" });
