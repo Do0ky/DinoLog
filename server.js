@@ -7,7 +7,7 @@ const cors = require('cors');
 const passport = require('passport');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
-//const userRoutes = require('./routes/user');
+const discoveryRoutes = require('./routes/discoveries');
 
 // Dotenv config
 dotenv.config( { path: './config/config.env' } );
@@ -27,7 +27,7 @@ app.use(passport.initialize());
 
 // Routes
 app.use('/api/auth', authRoutes);
-//app.use('/api/users', userRoutes);
+app.use("/api/discoveries", discoveryRoutes);
 
 // DB connection
 mongoose.connect(process.env.MONGO_URI)
