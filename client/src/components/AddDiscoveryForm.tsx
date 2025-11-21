@@ -28,22 +28,31 @@ export default function AddDiscoveryForm({ onClose, onSuccess } : { onClose: () 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const data = new FormData();
-    for (const key in form) data.append(key, form[key as keyof typeof form]);
-    if (photo) data.append("photo", photo);
+    try {
+      const data = new FormData();
+      for (const key in form) data.append(key, form[key as keyof typeof form]);
+      if (photo) data.append("photo", photo);
 
-    const res = await fetch("/api/discoveries", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: data
-    });
+      const res = await fetch("http://localhost:5001/api/discoveries", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: data
+      });
 
-    const json = await res.json();
-    if (json.success) {
-      onSuccess(json.discovery);
-      onClose();
+      const json = await res.json();
+      console.log("Response from API:", json);
+
+      if (json.success) {
+        onSuccess(json.discovery);
+        onClose();
+      } else {
+        alert("Failed to add discovery: " + (json.error || "Unknown error"));
+      }
+    } catch (err) {
+      console.error("Submit error:", err);
+      alert("Request failed. Check console for details.");
     }
   };
 
@@ -54,29 +63,36 @@ export default function AddDiscoveryForm({ onClose, onSuccess } : { onClose: () 
         <h2>Add Discovery</h2>
 
         <form onSubmit={submit}>
-          <label>Name</label>
-          <input name="name" required onChange={update} />
+          <label>Name *</label>
+          <input name="name" placeholder="Great Patagonian Mystery Fossil" required onChange={update} />
 
-          <label>Coordinates</label>
+          <label>Coordinates *</label>
           <div className="coords">
-            <input name="lat" placeholder="Latitude" onChange={update} />
-            <input name="lng" placeholder="Longitude" onChange={update} />
+            <input name="lat" placeholder="Latitude" required onChange={update} />
+            <input name="lng" placeholder="Longitude" required onChange={update} />
           </div>
 
-          <label>Species (optional)</label>
-          <input name="species" onChange={update} />
+          <label>Genus</label>
+          <input name="species" placeholder="Totallynotfakeus" onChange={update} />
           
-          <label>Age (optional)</label>
-          <input name="age" onChange={update} />
+          <label>Age</label>
+          <input name="age" placeholder="Millions of years old (no pressure)" onChange={update} />
 
-          <label>Geological Unit (optional)</label>
-          <input name="geologicalUnit" onChange={update} />
+          <label>Geological Unit</label>
+          <input name="geologicalUnit" placeholder="Name the rocks! They love attention" onChange={update} />
 
           <label>Description</label>
-          <textarea name="description" onChange={update} />
+          <textarea name="description" placeholder="Add notes so future paleontologists won’t curse you" onChange={update} />
 
-          <label>Photo upload</label>
-          <input type="file" accept="image/*" onChange={(e) => setPhoto(e.target.files?.[0] || null)} />
+          <label className="file-upload">
+            <span>Select a photo</span>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setPhoto(e.target.files?.[0] || null)}
+            />
+          </label>
+
 
           <button type="submit" className="submit-btn">Submit</button>
         </form>
