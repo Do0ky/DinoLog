@@ -22,6 +22,9 @@
   display: flex;
   align-items: center;
 }
+.header-logo:hover {
+  scale: calc(1.2);
+}
 .logo-img {
   height: 42px;
   width: auto;
@@ -38,6 +41,7 @@
 
 .header-discoveries-link:hover {
   color: #7a6b54;
+  scale: calc(1.2);
 }
 .header-nav a {
   color: #3e3a33;
@@ -68,6 +72,9 @@
 }
 .user-menu {
   position: relative;
+  margin-left: 1.8rem;
+  display: flex;
+  align-items: center;
 }
 .user-avatar {
   height: 36px;
@@ -75,6 +82,18 @@
   border-radius: 50%;
   cursor: pointer;
   border: 1px solid #d8c79b;
+}
+.user-avatar:hover {
+  scale: calc(2.1);
+}
+.user-name {
+  margin-left: 1rem;
+  font-size: 1rem;
+  color: #3e3a33;
+  font-style: oblique;
+  text-shadow: 
+    1px 1px 2px rgba(173, 127, 49, 0.466),
+    0 0 1px rgba(0, 0, 0, 0.15);
 }
 .dropdown {
   display: none;
