@@ -8,9 +8,11 @@ import * as L from "leaflet";
 import { useAuth } from '../context/AuthContext';
 /* COMPONENT */
 import AddDiscoveryForm from './AddDiscoveryForm';
+import EditDiscoveryForm from './EditDiscoveryForm';
 
 type Discovery = {
   _id: string;
+  user: string;
   name: string;
   coords: [number, number];
   imageUrl?: string | null;
@@ -21,10 +23,11 @@ type Discovery = {
 };
 
 function MapSection() {
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, user } = useAuth();
     const [showForm, setShowForm] = useState(false);
     const [discoveries, setDiscoveries] = useState<Discovery[]>([]);
     const [query, setQuery] = useState("");
+    const [editingDiscovery, setEditingDiscovery] = useState<Discovery | null>(null);
 
     // Filter discoveries by name, species, description
     const filtered = discoveries.filter(d =>
@@ -81,6 +84,16 @@ function MapSection() {
                         {d.age && <p><strong>Age:</strong> {d.age} Mya</p>}
                         {d.geologicalUnit && <p><strong>Geological Unit:</strong> {d.geologicalUnit}</p>}
                         {d.description && <p><strong>Notes:</strong> {d.description}</p>}
+                        
+                        {/* Edit button only if logged in and owner */}
+                        {isLoggedIn && user && d.user === user._id && (
+                        <button
+                            className="edit-btn"
+                            onClick={() => setEditingDiscovery(d)}
+                        >
+                            ✎
+                        </button>
+                        )}
                         </div>
                     </Popup>
                     </Marker>
@@ -113,6 +126,20 @@ function MapSection() {
             onSuccess={addDiscovery} 
             />
         )}
+        {editingDiscovery && (
+        
+        <EditDiscoveryForm
+            discovery={editingDiscovery}
+            onClose={() => setEditingDiscovery(null)}
+            onSuccess={(updated) => {
+            setDiscoveries(prev =>
+                prev.map(item => item._id === updated._id ? updated : item)
+            );
+            setEditingDiscovery(null);
+            }}
+        />
+)}
+
 
     </section>
   );
