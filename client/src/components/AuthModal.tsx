@@ -91,10 +91,12 @@ function AuthModal( { closeModal, onLoginSuccess }: { closeModal: () => void; on
                 return;
             }
 
+            // Save token if you want to auto-login
             localStorage.setItem("token", data.token);
 
             alert(`✔ Logged in as: ${data.user.username}`);
             onLoginSuccess(data.user);
+            closeModal();
 
         } catch (err) {
             console.error("Login failed", err);
