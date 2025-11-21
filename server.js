@@ -28,6 +28,7 @@ app.use(passport.initialize());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use("/api/discoveries", discoveryRoutes);
+app.use("/uploads", express.static("uploads"));
 
 // DB connection
 mongoose.connect(process.env.MONGO_URI)
