@@ -78,6 +78,27 @@
   color: #6b5430 !important;
 }
 /* pop-up*/
+.popup-content {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.95rem;
+  color: #3a4636;
+  background: #f7f4eecc;
+  border: 1px solid #9c8d7a;
+  border-radius: 6px;
+  padding: 0.3rem 1rem;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+  line-height: 1.2;
+}
+.popup-content h3 {
+  margin: 0.5rem 0 0 0;
+  font-size: 1.1rem;
+  color:#596d52;
+}
+.popup-content p {
+  margin: 0;
+  padding: 0;
+  font-size: 0.85rem;
+}
 .popup-img {
   width: 120px;
   height: auto;
