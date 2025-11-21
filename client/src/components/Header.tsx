@@ -50,6 +50,12 @@ function Header() {
                     >
                         Discoveries
                     </a>
+                    {/* Show My Fossils link only when logged in */}
+                    {isLoggedIn && (
+                        <Link to="/myfossils" className="header-discoveries-link">
+                        My Fossils
+                        </Link>
+                    )}
                 
                 {/* User section */}
                     {!isLoggedIn ? (
@@ -63,6 +69,7 @@ function Header() {
                                 alt="Avatar" 
                                 className="user-avatar"
                             />
+                            <span className="user-name">{user?.username}</span>
                             <div className="dropdown">
                                 <Link to="/myfossils">My Fossils</Link>
                                 <button onClick={logout}>Logout</button>
