@@ -75,9 +75,12 @@ function MapSection() {
                     <Popup>
                         <div className="popup-content">
                         <h3><em>{d.name}</em></h3>
+                        {d.species && <p><strong><em>{d.species}</em></strong></p>}
                         {d.imageUrl && <img src={`http://localhost:5001${d.imageUrl}`} alt={d.name} className="popup-img" />}
-                        <p>Coordinates: {lat}, {lng}</p>
-                        {d.description && <p>{d.description}</p>}
+                        <p><strong>Coordinates:</strong> {lat}, {lng}</p>
+                        {d.age && <p><strong>Age:</strong> {d.age} Mya</p>}
+                        {d.geologicalUnit && <p><strong>Geological Unit:</strong> {d.geologicalUnit}</p>}
+                        {d.description && <p><strong>Notes:</strong> {d.description}</p>}
                         </div>
                     </Popup>
                     </Marker>
