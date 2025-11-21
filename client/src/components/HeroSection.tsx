@@ -2,15 +2,17 @@
 import './HeroSection.css';
 /* REACT */
 import { useState } from 'react';
+/* CONTEXT */
+import { useAuth } from '../context/AuthContext';
 /* COMPONENT */
 import AuthModal from './AuthModal';
 
 function HeroSection() {
 
+    const { isLoggedIn, login, logout } = useAuth();
+
     // Modal visibility
     const [showAuthModal, setShowAuthModal] = useState(false);
-    // Loggedin state
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     // Scrolls smoothly to discoveries/map section
     const handleScrollToDiscoveries = () => {
@@ -20,18 +22,6 @@ function HeroSection() {
 
     //Open modal for user auth
     const openAuthModal = () => setShowAuthModal(true);
-
-    // Handle when login succeeds
-    const handleLoginSuccess = () => {
-        setIsLoggedIn(true);
-        setShowAuthModal(false);
-    };
-
-    // Logout handler
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        setIsLoggedIn(false);
-    };
 
     return(
         <section className="hero" aria-label="DinoLog hero section">
@@ -53,7 +43,7 @@ function HeroSection() {
                             Log In
                         </button>
                     ) : (
-                        <button className="hero-btn login-btn" aria-label="Logout" onClick={handleLogout}>
+                        <button className="hero-btn login-btn" aria-label="Logout" onClick={logout}>
                             Logout
                         </button>
                     )}
@@ -64,7 +54,7 @@ function HeroSection() {
             {showAuthModal && (
                 <AuthModal 
                     closeModal={ () => setShowAuthModal(false) }
-                    onLoginSuccess={handleLoginSuccess}  
+                    onLoginSuccess={login}  
                 />
             )}
 
