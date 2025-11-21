@@ -9,7 +9,7 @@ function HomePage() {
     return (
         <>
             <HeroSection />
-            <MapSection  isLoggedIn={isLoggedIn} />
+            <MapSection />
         </>
     );
 }
