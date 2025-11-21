@@ -66,8 +66,8 @@ function AuthModal( { closeModal, onLoginSuccess }: { closeModal: () => void; on
             // Save token if you want to auto-login
             localStorage.setItem("token", data.token);
 
-            alert(`✔ Registered successfully: ${data.user.username}`);
             onLoginSuccess(data.user);
+            closeModal();
 
         } catch (err) {
             console.error("Registration failed", err);
@@ -94,7 +94,6 @@ function AuthModal( { closeModal, onLoginSuccess }: { closeModal: () => void; on
             // Save token if you want to auto-login
             localStorage.setItem("token", data.token);
 
-            alert(`✔ Logged in as: ${data.user.username}`);
             onLoginSuccess(data.user);
             closeModal();
 
