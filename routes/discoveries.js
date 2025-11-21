@@ -52,4 +52,54 @@ router.post("/", passport.authenticate("jwt", { session: false }), upload.single
     }
 });
 
+router.put(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("photo"),
+  async (req, res) => {
+    try {
+      const { name, lat, lng, species, age, geologicalUnit, description } = req.body;
+
+      // Convert coordinates if provided
+      const latNum = lat ? parseFloat(lat) : undefined;
+      const lngNum = lng ? parseFloat(lng) : undefined;
+
+      const updates = {
+        name,
+        species,
+        age,
+        geologicalUnit,
+        description,
+      };
+
+      if (latNum !== undefined && lngNum !== undefined) {
+        if (isNaN(latNum) || isNaN(lngNum)) {
+          return res.status(400).json({ error: "Invalid coordinates" });
+        }
+        updates.coords = [latNum, lngNum];
+      }
+
+      if (req.file) {
+        updates.imageUrl = `/uploads/${req.file.filename}`;
+      }
+
+      // Only allow editing if the discovery belongs to the logged-in user
+      const discovery = await Discovery.findOneAndUpdate(
+        { _id: req.params.id, user: req.user._id },
+        updates,
+        { new: true }
+      );
+
+      if (!discovery) {
+        return res.status(404).json({ error: "Discovery not found or not owned by user" });
+      }
+
+      res.json({ success: true, discovery });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Failed to update discovery" });
+    }
+  }
+);
+
 module.exports = router;
