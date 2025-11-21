@@ -1,30 +1,13 @@
 /* STYLE */
 import './MapSection.css';
 /* REACT */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import * as L from "leaflet";
 /* CONTEXT */
 import { useAuth } from '../context/AuthContext';
 /* COMPONENT */
 import AddDiscoveryForm from './AddDiscoveryForm';
-
-type Fossil = {
-  id: String;
-  name: string;
-  image: string;
-  coords: [number, number];
-};
-const sampleFossils: Fossil[] = [
-  { id: 1, name: 'Eoraptor', image: '/images/eoraptor.jpg', coords: [-30.7, -67.8] },
-  { id: 2, name: 'Massospondylus', image: '/images/massospondylus.jpg', coords: [-28.96, 27.43] },
-  { id: 3, name: 'Spicomellus', image: '/images/spicomellus.jpg', coords: [33.3, -4.8] },
-  { id: 4, name: 'Archaeopteryx', image: '/images/archaeopteryx.jpg', coords: [48.9, 11.2] },
-  { id: 5, name: 'Microraptor', image: '/images/archaeopteryx.jpg', coords: [41.2, 119.4] },
-  { id: 6, name: 'Spinosaurus', image: '/images/spinosaurus.jpg', coords: [28.12, 29.04] },
-  { id: 7, name: 'Velociraptor', image: '/images/velociraptor.jpg', coords: [44.08, 103.43] },
-  { id: 8, name: 'Tyrannosaurus', image: '/images/tyrannosaurus.jpg', coords: [46.92, -107.73] },
-];
 
 type Discovery = {
   _id: string;
@@ -40,21 +23,29 @@ type Discovery = {
 function MapSection() {
     const { isLoggedIn } = useAuth();
     const [showForm, setShowForm] = useState(false);
-    const [discoveries, setDiscoveries] = useState(sampleFossils);
+    const [discoveries, setDiscoveries] = useState<Discovery[]>([]);
+    const [query, setQuery] = useState("");
 
-  const addDiscovery = (newItem: Discovery) => {
-  setDiscoveries((prev) => [...prev,
-    {id: newItem._id,
-      name: newItem.name,
-      coords: newItem.coords,
-      image: newItem.imageUrl || undefined,
-      species: newItem.species,
-      age: newItem.age,
-      geologicalUnit: newItem.geologicalUnit,
-      notes: newItem.description,
-    }
-  ]);
-};
+    // Filter discoveries by name, species, description
+    const filtered = discoveries.filter(d =>
+        d.name.toLowerCase().includes(query.toLowerCase()) ||
+        (d.species && d.species.toLowerCase().includes(query.toLowerCase())) ||
+        (d.description && d.description.toLowerCase().includes(query.toLowerCase()))
+    );
+
+    // Load discoveries from backend
+    useEffect(() => {
+        fetch("http://localhost:5001/api/discoveries")
+            .then(res => res.json())
+            .then(data => {
+                console.log("Discoveries from API:", data);
+                setDiscoveries(data)})
+            .catch(err => console.error("Failed to load discoveries", err));
+    }, []);
+
+    const addDiscovery = (newItem: Discovery) => {
+    setDiscoveries(prev => [...prev, newItem]);
+    };
 
     return (
     <section id="discoveries" className="map-section">
@@ -72,27 +63,37 @@ function MapSection() {
                 url="https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png"
             />
 
-            {sampleFossils.map(fossil => (
-            <Marker 
-                key={fossil.id} 
-                position={fossil.coords} 
-                icon={L.icon({ iconUrl: '/images/fossil-marker.png', iconSize: [20, 31] })}
-            >
-                <Popup>
-                <div className="popup-content">
-                    <h3><em>{fossil.name}</em></h3>
-                    <img src={fossil.image} alt={fossil.name} className="popup-img" />
-                    <p>Coordinates: {fossil.coords[0]}, {fossil.coords[1]}</p>
-                </div>
-                </Popup>
-            </Marker>
-            ))}
+            {filtered.map(d => {
+                const lat = Number(d.coords[0]);
+                const lng = Number(d.coords[1]);
+                return (
+                    <Marker
+                    key={d._id}
+                    position={[lat, lng]}
+                    icon={L.icon({ iconUrl: '/images/fossil-marker.png', iconSize: [20, 31] })}
+                    >
+                    <Popup>
+                        <div className="popup-content">
+                        <h3><em>{d.name}</em></h3>
+                        {d.imageUrl && <img src={`http://localhost:5001${d.imageUrl}`} alt={d.name} className="popup-img" />}
+                        <p>Coordinates: {lat}, {lng}</p>
+                        {d.description && <p>{d.description}</p>}
+                        </div>
+                    </Popup>
+                    </Marker>
+                );
+            })}
 
         </MapContainer>
 
         {/* Search bar */}
         <div className="map-search">
-            <input type="text" placeholder="Search for fossils..." />
+            <input
+                type="text"
+                placeholder="Search for fossils..."
+                value={query}
+                onChange={ e => setQuery(e.target.value) }
+            />
         </div>
 
         {/* Floating action button */}

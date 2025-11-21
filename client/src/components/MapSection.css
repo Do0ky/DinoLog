@@ -63,6 +63,20 @@
      0 0 0 3px rgba(166, 139, 91, 0.15),
      inset 0 0 3px rgba(0,0,0,0.08);
 }
+/* TileLayer Map attribution */
+.leaflet-control-attribution {
+  color: #a68b5b !important;
+  font-family: 'IBM Plex Sans', sans-serif !important;
+  font-size: 0.7rem !important;
+  background-color: rgba(245, 245, 220, 0.459) !important;
+}
+.leaflet-control-attribution a {
+  color: #a68b5b !important;
+  text-decoration: none !important;
+}
+.leaflet-control-attribution a:hover {
+  color: #6b5430 !important;
+}
 /* pop-up*/
 .popup-img {
   width: 120px;
@@ -104,4 +118,3 @@
   color: #2e2e2e;
   user-select: none;
 }
-
