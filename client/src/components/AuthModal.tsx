@@ -134,7 +134,7 @@ function AuthModal( { closeModal, onLoginSuccess }: { closeModal: () => void; on
                             <label>Email</label>
                             <input
                                 type="email"
-                                placeholder="fossil-hunter@rockmail.co"
+                                placeholder="fossil-hunter@rockmail.com"
                                 value={email}
                                 onChange={ (e) => setEmail(e.target.value) }    
                             />
