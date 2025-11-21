@@ -52,15 +52,11 @@ router.post("/", passport.authenticate("jwt", { session: false }), upload.single
     }
 });
 
-router.put(
-  "/:id",
-  passport.authenticate("jwt", { session: false }),
-  upload.single("photo"),
-  async (req, res) => {
+router.put("/:id", passport.authenticate("jwt", { session: false }), upload.single("photo"), async (req, res) => {
     try {
       const { name, lat, lng, species, age, geologicalUnit, description } = req.body;
 
-      // Convert coordinates if provided
+      // Convert coordinates 
       const latNum = lat ? parseFloat(lat) : undefined;
       const lngNum = lng ? parseFloat(lng) : undefined;
 
