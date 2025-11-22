@@ -19,15 +19,15 @@
 
 ## 🌍 Project Vision
 
-**DinoLog** is designed for researchers, amateur paleontologists, and enthusiasts who want to explore and record fossil discoveries. Inspired by field notebooks and geological maps, the app blends scientific accuracy with archival aesthetics.
-<br>It makes paleontology feel immersive and authentic — a digital field journal where every fossil has a place and every place tells a million-year-old story.
+**DinoLog** is built for researchers, amateur paleontologists, and enthusiasts to explore and record fossil discoveries. Inspired by field notebooks and geological maps, it combines scientific accuracy with archival aesthetics.
+<br>It offers an immersive digital field journal where fossils are restored to their geographic context and every site reveals part of Earth’s ancient story.
 
 
 ## 🚀 Features
-
+🌐 **Front‑End**
 - 🗺️ **Interactive Map**  
-    Explore fossil sites worldwide with custom markers and expedition‑style textures.
-- 📍 **Add Discoveries**   
+    Discover dinosaur localities with custom markers, expedition‑style textures, and popups showing specimen details.
+- 📍 **Add & Edit Discoveries**   
   Floating action button lets logged‑in users add new fossil coordinates and details.
 - 🔍 **Search Bar**  
   Quickly locate fossils by name or location.
@@ -49,21 +49,35 @@
 
 ## 📁 Project Structure
 ```bash
-src/
-├── assets/
-│   └── images
-├── components/
-│   ├── AuthModal.tsx
-│   ├── Footer.tsx
-│   ├── Header.tsx
-│   ├── HeroSection.tsx
-│   └── MapSection.tsx
-├── pages/
-│   ├── HomePage.tsx
-│   └── MyFossilsPage.tsx
-├── App.tsx
-├── index.tsx
-└── App.css
+assets/
+client/
+├── public/
+│   ├── images/
+│   └── index.html
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── AddDiscoveryForm.tsx
+│   │   ├── AuthModal.tsx
+│   │   ├── EditDiscoveryForm.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── HeroSection.tsx
+│   │   └── MapSection.tsx
+│   ├── context/
+│   │   └── AuthContext.tsx
+│   ├── pages/
+│   │   ├── HomePage.tsx
+│   │   └── MyFossilsPage.tsx
+│   ├── App.tsx
+│   ├── index.tsx
+│   ├── App.css
+│   └── index.css
+config/
+models/
+routes/
+uploads/
+server.js
 ```
 
 ## 📚 Data Sources and inspirations
